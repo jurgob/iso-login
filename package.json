@@ -8,7 +8,10 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node index.js",
+    "watch-server": "nodemon ./index",
+    "watch-client": "webpack --colors --watch",
+    "watch": "node ./node_modules/concurrently/src/main.js --kill-others \"npm run watch-client\" \"npm run watch-server\""
   },
   "author": "",
   "license": "ISC",
@@ -16,13 +19,19 @@
     "express": "^4.13.3",
     "flux": "^2.1.1",
     "jade": "^1.11.0",
-    "react": "^0.14.0-rc1"
+    "react": "^0.14.0-rc1",
+    "react-dom": "^0.14.0-rc1"
   },
   "devDependencies": {
     "babel": "^5.8.23",
     "babel-core": "^5.8.25",
+    "babel-eslint": "^4.1.3",
     "babel-loader": "^5.3.2",
+    "concurrently": "^0.1.1",
+    "eslint": "^1.6.0",
+    "eslint-plugin-react": "^3.5.1",
     "jsx-loader": "^0.13.2",
+    "nodemon": "^1.7.1",
     "webpack": "^1.12.2",
     "webpack-dev-server": "^1.12.0"
   }

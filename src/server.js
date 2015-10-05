@@ -1,6 +1,10 @@
 'use strict'
 
 import express from 'express';
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
+
+import LoginPage from './shared/components/LoginPage';
 
 const app = express();
 const pubDir = __dirname+'/../public';
@@ -14,7 +18,8 @@ app.use('/img', express.static(pubDir+'/img'));
 
 
 app.all('/*', function (req, res, next) {
-  res.render('index', { content: '<div>test</div>' });
+  let renderedHtml = ReactDOMServer.renderToString(<LoginPage />);
+  res.render('index', { content: renderedHtml });
 });
 
 var server = app.listen(8080, function () {
