@@ -1,0 +1,17 @@
+html
+  head
+    title="iso login"
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+
+    meta(name='description', content='')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='shortcut icon', href='/favicon.ico')
+    link(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css')
+    link(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.css')
+  body
+    #content
+      #react-app!= content
+
+  script(src='http://cdn.polyfill.io/v2/polyfill.min.js', defer)
+  script(src='/js/bundle.js', defer)
