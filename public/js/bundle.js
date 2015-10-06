@@ -68,7 +68,7 @@
 
 	var history = (0, _history.createHistory)('/');
 
-	var clientRender = true;
+	var clientRender = false;
 
 	if (clientRender && typeof window !== 'undefined' && typeof document !== 'undefined') {
 	  _reactDom2['default'].render(_react2['default'].createElement(
@@ -25761,23 +25761,10 @@
 
 	var _componentsHomePage2 = _interopRequireDefault(_componentsHomePage);
 
-	var _historyJs = __webpack_require__(231);
-
-	var _historyJs2 = _interopRequireDefault(_historyJs);
-
-	function requireAuth() {
-	  console.log('requireAuth');
-	  _historyJs2['default'].pushState(null, '/home');
-	}
-
 	var routes = _react2['default'].createElement(
 	  _reactRouter.Route,
 	  { path: '/' },
-	  _react2['default'].createElement(
-	    _reactRouter.Route,
-	    { onEnter: requireAuth },
-	    _react2['default'].createElement(_reactRouter.Route, { path: 'login', component: _componentsLoginPage2['default'] })
-	  ),
+	  _react2['default'].createElement(_reactRouter.Route, { path: 'login', component: _componentsLoginPage2['default'] }),
 	  _react2['default'].createElement(_reactRouter.Route, { path: 'home', component: _componentsHomePage2['default'] })
 	);
 
@@ -25820,8 +25807,8 @@
 	  _createClass(LoginPage, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      var _loginParams = this.props.location.search;
-	      console.log(_loginParams);
+	      // let _loginParams = this.props.location.search;
+	      // console.log(_loginParams);
 	      console.log('this.props.history', this.props.history);
 	      this.props.history.replaceState(null, '/home');
 	    }
@@ -25896,21 +25883,6 @@
 	})(_react2['default'].Component);
 
 	exports['default'] = HomePage;
-	module.exports = exports['default'];
-
-/***/ },
-/* 231 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-
-	var _history = __webpack_require__(200);
-
-	var history = (0, _history.createMemoryHistory)();
-	exports['default'] = history;
 	module.exports = exports['default'];
 
 /***/ }

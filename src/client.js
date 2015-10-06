@@ -11,7 +11,7 @@ import { createHistory } from 'history';
 const history = createHistory('/');
 import routes from './shared/routes';
 
-let clientRender = true;
+let clientRender = false;
 
 if ( clientRender && typeof(window) !== 'undefined' && typeof(document) !== 'undefined' ) {
   ReactDOM.render(
