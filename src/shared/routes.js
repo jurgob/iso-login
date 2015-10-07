@@ -5,15 +5,21 @@ import { Route } from 'react-router';
 
 import LoginForm from './components/LoginPage';
 import HomePage from './components/HomePage';
+import Actions from './AppActions';
+import historyObj from './history.js';
 
-function requireAuth(nextState, replaceState) {
-  // replaceState({ nextPathname: nextState.location.pathname }, '/login');
+function historySetup(nextState, replaceState) {
+  historyObj.replaceState = replaceState;//TODO: this is the ugliest solution ever
+}
+
+function doLogin(nextState, replaceState) {
+  Actions.doLogin();
 }
 
 let routes = (
-  <Route path="/" >
-    <Route path="login" component={LoginForm} />
-    <Route path="home" component={HomePage} onEnter={requireAuth} />
+  <Route path="/" onEnter={historySetup} >
+    <Route path="login" component={LoginForm} onEnter={doLogin} />
+    <Route path="home" component={HomePage} />
   </Route>
 );
 

@@ -9,8 +9,8 @@ class LoginPage extends React.Component {
   componentWillMount() {
     // let _loginParams = this.props.location.search;
     // console.log(_loginParams);
-    console.log('this.props.history' ,this.props.history);
-    this.props.history.replaceState(null, '/home');
+    // console.log('this.props.history' ,this.props.history);
+    // this.props.history.replaceState(null, '/home');
   }
   render() {
     return (<div>Da Login Page</div>);

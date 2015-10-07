@@ -4,12 +4,9 @@ import express from 'express';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 
-
 import { RoutingContext, match } from 'react-router';
-import history from './shared/history.js';
+import {history} from './shared/history.js';
 import routes from './shared/routes';
-
-// import createLocation from 'history/lib/createLocation';
 
 const app = express();
 const pubDir = __dirname+'/../public';
@@ -25,10 +22,9 @@ app.use('/img', express.static(pubDir+'/img'));
 
 
 app.all('/*', function (req, res, next) {
-
   if (app.get('serverside_rendering')) {
+    console.log('req.url ',req.url);
     let location = history.createLocation(req.url);
-    // let location = createLocation(req.url);
     match({ routes, location }, (error, redirectLocation, renderProps) => {
       if (redirectLocation) {
         console.log('-- redirect: '+redirectLocation.pathname);
@@ -50,6 +46,5 @@ app.all('/*', function (req, res, next) {
 var server = app.listen(8080, function () {
   var host = server.address().address;
   var port = server.address().port;
-
   console.log('Example app listening at http://%s:%s', host, port);
 });
