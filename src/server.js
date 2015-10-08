@@ -5,13 +5,14 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 
 import { RoutingContext, match } from 'react-router';
+import config from './shared/config';
 import {history} from './shared/history.js';
 import routes from './shared/routes';
 
 const app = express();
 const pubDir = __dirname+'/../public';
 
-app.set('serverside_rendering', true);
+app.set('serverside_rendering', config.render_server);
 
 app.set('views', pubDir+'/views');
 app.set('view engine', 'jade');
