@@ -3,7 +3,15 @@
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
-import objectParams2url from './objectParams2url';
+function objectParams2url(params) {
+  return Object.keys(params)
+    .filter((el) => {
+      return !!el;
+    }).map(function(el) {
+      return el+'='+encodeURIComponent(params[el]);
+    })
+    .join('&');
+};
 
 var HttpJsonClient = (function() {
   var scope = {};
