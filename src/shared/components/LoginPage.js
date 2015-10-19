@@ -13,9 +13,15 @@ class LoginPage extends React.Component {
     // this.props.history.replaceState(null, '/home');
   }
   render() {
-    return (<div>Da Login Page</div>);
+    return (
+      <div>
+        <h1>Da Login Page</h1>
+      </div>);
   }
 
 }
+
+
+
 
 export default LoginPage;
