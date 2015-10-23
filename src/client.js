@@ -1,6 +1,6 @@
 'use strict';
 
-
+import { hydrateStores } from './shared/utils/isoUtils';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -15,8 +15,15 @@ import routes from './shared/routes';
 let clientRender = config.render_client;
 
 if ( clientRender && typeof(window) !== 'undefined' && typeof(document) !== 'undefined' ) {
-  ReactDOM.render(
-    (<Router history={history}>{routes}</Router>),
-    document.getElementById('content')
-  );
+
+  let clientSideRender = function(state) {
+    ReactDOM.render(
+      (<Router history={history}>{routes}</Router>),
+      document.getElementById('content')
+    );
+  };
+
+  var state = window.__STATE__;
+  hydrateStores(state);
+  clientSideRender(state);
 }
