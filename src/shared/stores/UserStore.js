@@ -4,19 +4,8 @@ import {ReduceStore} from 'flux/utils';
 import AppDispatcher from '../AppDispatcher';
 import {LOGIN_SUCCESS} from '../AppConstants';
 
-
-// function getStoreInitialState(storeName) {
-//   console.log('£££ getStoreInitialState');
-//   if (!require('is-browser')) {
-//     return global.__STATE__[storeName];
-//   } else {
-//     return window.__STATE__[storeName];
-//   }
-// }
-
 class UserStore extends ReduceStore {
   getInitialState() {
-    // var init_state = getStoreInitialState('UserStore');
     return '';
   }
 
@@ -42,9 +31,5 @@ class UserStore extends ReduceStore {
 }
 
 const instance = new UserStore(AppDispatcher);
-
-if ( require('is-browser') ) {
-  window.UserStore = instance;
-}
 
 export default instance;

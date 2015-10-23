@@ -14,6 +14,7 @@ import routes from './shared/routes';
 import UserStore from './shared/stores/UserStore';
 // import AppActions from './shared/AppActions';
 import ApiUtils from './shared/utils/ApiUtils';
+import { fetchDataBeforeRender } from './shared/utils/isoUtils';
 
 const app = express();
 const pubDir = __dirname+'/../public';
@@ -50,7 +51,8 @@ app.all('/*', function (req, res, next) {
 
     // UserStore._state = 'bau';
 
-    renderServerSide();
+    // renderServerSide();
+    fetchDataBeforeRender(null, renderServerSide);
     // ApiUtils
     //   .login()
     //   .then(function(user) {
