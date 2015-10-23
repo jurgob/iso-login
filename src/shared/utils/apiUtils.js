@@ -24,14 +24,14 @@ let ApiUtils = (function() {
     return HttpJsonClient
       .get('https://api.github.com/users/octocat/orgs')
       .then(function(json) {
-        return {'username': 'jurgo boemo'};
+        return {'username': 'username faked'};
       })
       .catch(printError);
   };
 
   scope.getCurrentProfile = function() {
     return Promise.resolve((json) => {
-      return {'username': 'jurgo boemo'};
+      return {'username': 'username faked'};
     });
   };
 
