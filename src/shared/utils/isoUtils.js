@@ -4,17 +4,16 @@
 import UserStore from '../stores/UserStore';
 import SearchStore from '../stores/SearchStore';
 import ApiUtils from '../utils/ApiUtils';
-
+import Immutable from 'immutable';
 
 export function hydrateStores(state) {
 
-  console.log('hydrateStores: ',state);
-
   UserStore._state = state.username || "";
 
-  SearchStore._state = {
-    currentSearchUrl: state.search || {}
+  var searchState = state.search || {
+    currentSearchUrl: ""
   };
+  SearchStore._state = Immutable.Map(searchState);
 
 }
 

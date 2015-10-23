@@ -31,11 +31,12 @@ class SearchStore extends ReduceStore {
   }
 
   getCurrentSearchUrl() {
-    return "";
-    // return state.get('currentSearchUrl');
+    let state = this.getState();
+    return state.get('currentSearchUrl');
   }
 
-  getCurrentSearchUrl() {
+  getCurrentSearch() {
+    let state = this.getState();
     return state.get(state.get('currentSearchUrl'));
   }
 

@@ -13,7 +13,8 @@ class HomePage extends React.Component {
 
   static calculateState(prevState) {
     return {
-      username: UserStore.getUsername()
+      username: UserStore.getUsername(),
+      curSearchUrl: SearchStore.getCurrentSearchUrl()
     };
   }
 
@@ -35,6 +36,9 @@ class HomePage extends React.Component {
     return (
       <div>
         <h1>Da Home Page</h1>
+        <div>
+          test: {this.state.curSearchUrl}
+        </div>
         <UserProps username={this.state.username} onClick={this.doLogin} />
       </div>
     );
