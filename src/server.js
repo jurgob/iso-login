@@ -32,7 +32,8 @@ app.use('/img', express.static(pubDir+'/img'));
 
 app.all('/*', function (req, res, next) {
   if (app.get('serverside_rendering')) {
-    var renderServerSide = function() {
+
+    var renderServerSide = function(state) {
       let location = history.createLocation(req.url);
       match({ routes, location }, (error, redirectLocation, renderProps) => {
         if (redirectLocation) {
@@ -44,7 +45,7 @@ app.all('/*', function (req, res, next) {
           res.status(404).send('Not found');
         } else {
           let serverRender = ReactDOMServer.renderToString(<RoutingContext {...renderProps}/>);
-          res.render('index',{ content: serverRender });
+          res.render('index',{ content: serverRender, state: state });
         }
       });
     };

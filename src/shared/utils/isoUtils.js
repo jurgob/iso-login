@@ -2,17 +2,17 @@
 
 // import OWApiClient from './owApiClient';
 import UserStore from '../stores/UserStore';
-// import SearchStore from '../stores/SearchStore';
+import SearchStore from '../stores/SearchStore';
 
 
 export function hydrateStores(state){
 
   UserStore._state = state.username || "";
 
-  // SearchStore._state = {
-  //   currentSearchUrl: state.currentSearchUrl || "",
-  //   searchResults: state.searchResults || []
-  // };
+  SearchStore._state = {
+    currentSearchUrl: state.currentSearchUrl || "",
+    searchResults: state.searchResults || []
+  };
 
 }
 
@@ -34,7 +34,7 @@ export function fetchDataBeforeRender(token, renderApp) {
       username: "jurgo"
     };
     hydrateStores(stateObj);
-    renderApp();
+    renderApp(stateObj);
 
 }
 
