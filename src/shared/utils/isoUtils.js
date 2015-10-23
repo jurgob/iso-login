@@ -3,9 +3,10 @@
 // import OWApiClient from './owApiClient';
 import UserStore from '../stores/UserStore';
 import SearchStore from '../stores/SearchStore';
+import ApiUtils from '../utils/ApiUtils';
 
 
-export function hydrateStores(state){
+export function hydrateStores(state) {
 
   UserStore._state = state.username || "";
 
@@ -28,16 +29,33 @@ export function dehydrateStores() {
 
 }
 
-export function fetchDataBeforeRender(token, renderApp) {
+export function fetchDataBeforeRender(renderApp, stateObj, request) {
+  if (!stateObj) stateObj = {};
 
-    var stateObj = {
-      username: "jurgo"
-    };
-    hydrateStores(stateObj);
-    renderApp(stateObj);
+  fetchData(stateObj, request)
+    .then(function(state) {
+      console.log(' **** fetchData state: ',state);
+
+      hydrateStores(state);
+      renderApp(state);
+    });
+
 
 }
 
+function fetchData(state, request) {
+
+  return ApiUtils
+    .login()
+    .then(function(data) {
+      state.username = data.username;
+      console.log(' *** after login', state);
+      return state;
+    }).catch(function(err) {
+      console.log('login err: ',err);
+    });
+
+}
 
 /*export fetchDataBeforeRender = function(token, renderApp) {
   if (token) {

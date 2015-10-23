@@ -22,8 +22,6 @@ if ( clientRender && typeof(window) !== 'undefined' && typeof(document) !== 'und
       document.getElementById('content')
     );
   };
-
   var state = window.__STATE__;
-  hydrateStores(state);
-  clientSideRender(state);
+  fetchDataBeforeRender(clientSideRender, state);
 }

@@ -50,22 +50,8 @@ app.all('/*', function (req, res, next) {
       });
     };
 
-    // UserStore._state = 'bau';
-
-    // renderServerSide();
-    fetchDataBeforeRender(null, renderServerSide);
-    // ApiUtils
-    //   .login()
-    //   .then(function(user) {
-    //     console.log('user ',user);
-    //     global.__STATE__ = {};
-    //     global.__STATE__.UserStore = user.username;
-    //     renderServerSide();
-    //   });
-
-
-
-
+    var state = {username: "jimmy"};
+    fetchDataBeforeRender(renderServerSide, state);
 
   }else {
     res.render('index',{ content: '' });
