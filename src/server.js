@@ -50,8 +50,11 @@ app.all('/*', function (req, res, next) {
       });
     };
 
-    var state = {username: "jimmy"};
-    fetchDataBeforeRender(renderServerSide, state);
+    var state = {
+      token: '',
+      username: "jimmy"
+    };
+    fetchDataBeforeRender(renderServerSide, state, req);
 
   }else {
     res.render('index',{ content: '' });

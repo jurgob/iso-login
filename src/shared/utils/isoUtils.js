@@ -45,15 +45,34 @@ export function fetchDataBeforeRender(renderApp, stateObj, request) {
 
 function fetchData(state, request) {
 
-  return ApiUtils
-    .login()
-    .then(function(data) {
-      state.username = data.username;
-      console.log(' *** after login', state);
-      return state;
-    }).catch(function(err) {
-      console.log('login err: ',err);
-    });
+  let path = request.path;
+  let reqParams = request.query;
+  let token = state.token;
+
+  if (token)
+    ApiUtils.setAuthToken(token);
+
+  let userInfo = Promise.resolve(() => {
+    return state;
+  });
+
+  let setUserInfo = function(data) {
+    console.log('setUserInfo ');
+    state.username = data.username;
+    return state;
+  };
+
+  if (path === '/home') {
+    userInfo = ApiUtils
+      .login(reqParams)
+      .then(setUserInfo);
+  } else if ( ApiUtils.isAuthTokenSetted() ) {
+    userInfo = ApiUtils
+      .getCurrentProfile()
+      .then(setUserInfo);
+  }
+
+  return userInfo;
 
 }
 
