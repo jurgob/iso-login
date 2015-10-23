@@ -3,6 +3,7 @@
 import React from 'react';
 import {Container} from 'flux/utils';
 import UserStore from '../stores/UserStore';
+import SearchStore from '../stores/SearchStore';
 import AppActions from '../AppActions';
 
 class HomePage extends React.Component {

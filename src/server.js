@@ -51,8 +51,11 @@ app.all('/*', function (req, res, next) {
     };
 
     var state = {
-      token: '',
-      username: "jimmy"
+      token: 'thisissupersecred',
+      username: "",
+      search:{
+        currentSearchUrl:'?q=react'
+      }
     };
     fetchDataBeforeRender(renderServerSide, state, req);
 

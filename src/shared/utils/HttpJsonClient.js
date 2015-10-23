@@ -54,6 +54,10 @@ var HttpJsonClient = (function() {
   scope.unsetRequestHeader = function(name, value) {
     delete requestHeader[name];
   };
+  scope.getRequestSettedHeaders = function() {
+    return requestHeader;
+  }
+
 
   scope.post = _fetchJsonConfig('post',{"Content-type": "application/x-www-form-urlencoded; charset=UTF-8"});
   scope.get = _fetchJsonConfig('get' ,{});

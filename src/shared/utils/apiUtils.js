@@ -18,6 +18,10 @@ let ApiUtils = (function() {
     console.log('fetch error: ',err);
   };
 
+  let returnJson = (json) => {
+    console.log('returnJson ',returnJson);
+    return json();
+  };
 
   scope.login = function() {
     console.log(' ** start login!! ');
@@ -32,7 +36,7 @@ let ApiUtils = (function() {
   scope.getCurrentProfile = function() {
     return Promise.resolve((json) => {
       return {'username': 'username faked'};
-    });
+    }).then(returnJson);
   };
 
   scope.search = function(params) {
@@ -53,7 +57,6 @@ let ApiUtils = (function() {
 
       return promise;
     }
-
 
   };
 

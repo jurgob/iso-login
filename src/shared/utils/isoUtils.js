@@ -8,11 +8,12 @@ import ApiUtils from '../utils/ApiUtils';
 
 export function hydrateStores(state) {
 
+  console.log('hydrateStores: ',state);
+
   UserStore._state = state.username || "";
 
   SearchStore._state = {
-    currentSearchUrl: state.currentSearchUrl || "",
-    searchResults: state.searchResults || []
+    currentSearchUrl: state.search || {}
   };
 
 }
@@ -45,6 +46,8 @@ export function fetchDataBeforeRender(renderApp, stateObj, request) {
 
 function fetchData(state, request) {
 
+  console.log('fetchData state: ',state);
+
   let path = request.path;
   let reqParams = request.query;
   let token = state.token;
@@ -52,27 +55,39 @@ function fetchData(state, request) {
   if (token)
     ApiUtils.setAuthToken(token);
 
-  let userInfo = Promise.resolve(() => {
+  let userInfo = Promise.resolve((json) => {
+    console.log('userInfo ',json);
+    if (json.username)
+      state.username = json.username;
     return state;
   });
 
   let setUserInfo = function(data) {
-    console.log('setUserInfo ');
     state.username = data.username;
     return state;
   };
 
-  if (path === '/home') {
-    userInfo = ApiUtils
-      .login(reqParams)
-      .then(setUserInfo);
-  } else if ( ApiUtils.isAuthTokenSetted() ) {
-    userInfo = ApiUtils
-      .getCurrentProfile()
-      .then(setUserInfo);
-  }
 
-  return userInfo;
+  if (!state.username)
+    if (path === '/login') {
+      userInfo = ApiUtils
+        .login(reqParams)
+        .then(setUserInfo);
+    } else if ( ApiUtils.isAuthTokenSetted() ) {
+      console.log('START USER PROFILE');
+
+      userInfo = ApiUtils
+        .getCurrentProfile()
+        .then(setUserInfo);
+    }
+
+
+
+
+
+  return userInfo.then(() => {
+    return state;
+  });
 
 }
 
